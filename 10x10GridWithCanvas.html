@@ -51,7 +51,7 @@ context.strokeRect(x*cellsize,y*cellsize,cellsize,cellsize);
 } 
 
 //Take back selected cells to select new cell
-function RerrganizedGrid(event){    
+function ReorganizedGrid(event){    
 var rect=canvas.getBoundingClientRect();
 var X= event.x-rect.left;
 var Y= event.y-rect.top;
@@ -85,7 +85,7 @@ draw(x,y);
 <table>
 	<tr>
 		<td  style='vertical-align:top; padding:10px'> 
-			<canvas id="canvas" width="500" height="500" onmousedown="mousedown=true;RerrganizedGrid(event)" onmouseup="mousedown=false;"></canvas>
+			<canvas id="canvas" width="500" height="500" onmousedown="mousedown=true;ReorganizedGrid(event)" onmouseup="mousedown=false;"></canvas>
 		</td>
  
 	</tr>
