@@ -1,0 +1,97 @@
+<script>
+var canvas;            
+var context;
+var cellsize=30;
+
+                  
+var selectedcell=[];
+
+var mousedown=false;
+
+//This is a static grid to create a 10x10 grid.
+var grid= [
+["","","","","","","","","",""],
+["","","","","","","","","",""],
+["","","","","","","","","",""],
+["","","","","","","","","",""],
+["","","","","","","","","",""],
+["","","","","","","","","",""],
+["","","","","","","","","",""],
+["","","","","","","","","",""],
+["","","","","","","","","",""],
+["","","","","","","","","",""]
+];
+
+
+//Draw grid with cells
+function drawGrid(){                   
+	for (var x=0;x<10;x++){
+		for (var y=0;y<10;y++){
+  			draw(x,y);
+  		}
+  	}
+}
+  
+//Draw cells
+function draw(x,y){
+canvas=document.getElementById('canvas');
+context=canvas.getContext('2d');
+
+var element=grid[x][y]; 
+context.fillStyle='white';
+if(element.charAt(element.length-1)=='.'){//if a cell is selected then mark that with black color
+  context.fillStyle='black';
+  }
+      cell=grid[x][y]; 
+	  
+	  
+context.fillRect(x*cellsize,y*cellsize,cellsize,cellsize);
+context.strokeRect(x*cellsize,y*cellsize,cellsize,cellsize);
+	  
+} 
+
+//Take back selected cells to select new cell
+function RerrganizedGrid(event){    
+var rect=canvas.getBoundingClientRect();
+var X= event.x-rect.left;
+var Y= event.y-rect.top;
+//Do not miss noves of mouse for grid.
+var  x= Math.floor(X/cellsize);   
+var  y= Math.floor(Y/cellsize);
+
+
+if (selectedcell.length){               
+	grid[selectedcell[0][0]][selectedcell[0][1]]=grid[selectedcell[0][0]][selectedcell[0][1]].replace(/./g,"");
+	draw(selectedcell[0][0],selectedcell[0][1]);
+}
+
+selectedcell=[];
+selectedcell.push([x,y])
+grid[x][y]+='.';//Define the selected cell with a "." and then fill it with black color during drw operation.
+
+draw(x,y);
+
+}
+
+
+
+
+
+</script>
+
+<button onclick="drawGrid()" title="checks if word is on the list.">Draw 10x10 Grid</button>
+<br>
+
+<table>
+	<tr>
+		<td  style='vertical-align:top; padding:10px'> 
+			<canvas id="canvas" width="500" height="500" onmousedown="mousedown=true;RerrganizedGrid(event)" onmouseup="mousedown=false;"></canvas>
+		</td>
+ 
+	</tr>
+ </table>
+
+ 
+
+
+
