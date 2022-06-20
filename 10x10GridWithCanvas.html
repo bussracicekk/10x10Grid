@@ -23,20 +23,21 @@ var grid= [
 ];
 
 
+
 //Draw grid with cells
-function drawGrid(){                   
+function drawGrid(){ 
+	canvas = document.getElementById('canvas');
+	context = canvas.getContext('2d');                  
 	for (var x=0;x<10;x++){
 		for (var y=0;y<10;y++){
   			draw(x,y);
   		}
   	}
 }
-  
+
+
 //Draw cells
 function draw(x,y){
-canvas=document.getElementById('canvas');
-context=canvas.getContext('2d');
-
 var element=grid[x][y]; 
 context.fillStyle='white';
 if(element.charAt(element.length-1)=='.'){//if a cell is selected then mark that with black color
@@ -64,7 +65,6 @@ if (selectedcell.length){
 	grid[selectedcell[0][0]][selectedcell[0][1]]=grid[selectedcell[0][0]][selectedcell[0][1]].replace(/./g,"");
 	draw(selectedcell[0][0],selectedcell[0][1]);
 }
-
 selectedcell=[];
 selectedcell.push([x,y])
 grid[x][y]+='.';//Define the selected cell with a "." and then fill it with black color during drw operation.
@@ -90,8 +90,3 @@ draw(x,y);
  
 	</tr>
  </table>
-
- 
-
-
-
